@@ -8,4 +8,4 @@ for i in range(26):
         if(x == Letras[i]):
             Numeracao += Valor[i]
 
-print(Numeracao)
+print("O valor dessa sequencia de proteinas: {}",Numeracao)
