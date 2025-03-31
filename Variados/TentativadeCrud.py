@@ -1,10 +1,12 @@
 from tkinter import *
+from time import *
 
 nomes =[]
 telefones = []
 enderecos = []
 emails = []
 tela = Tk()
+pagina = False
 
 tela.title("Cadastro de Clientes")
 tela.config(background="#0A0E32", borderwidth=10)  # Fundo azul royal escuro
@@ -42,20 +44,30 @@ txt_email.place(x=180,y=200)
 
 
 #BOTOES
+def criar_registro(window,I,posx,posy):
+        
+        lbl_dados = Label(window, background="#f1f1f1",font=("Courier New", 18, "bold"),fg="black",text="Nome:"+nomes[I]+"\nTelefone:"+telefones[I]+"\nEndereco:"+enderecos[I]+"\nEmail:"+emails[I])
+        lbl_dados.place(x=posx,y=posy)
+        posx +=(100*I)
+        posy +=(100*I)
+        
 def Cadastrar():
-    i = 0
+    I = 0
+    
     nomes.append(txt_nome.get())
     telefones.append(txt_telefone.get())
     enderecos.append(txt_endereco.get())
     emails.append(txt_email.get())
-    tela_registro = Toplevel(tela)
-    tela_registro.geometry("800x600")
-    tela.config(background="#0A0E32", borderwidth=10)#pareiaqui
+    if(pagina == False):
+        tela_registro = Toplevel(tela)
+        tela_registro.geometry("800x600")
+        tela_registro.config(background="#0A0E32", borderwidth=10)
+    pagina = True
+    criar_registro(tela_registro,I,100,100)
+    I+=1
 
-    #for j in range(0,10,1):
-    #    lbl_dados = Label(tela, background="#f1f1f1",font=("Courier New", 18, "bold"),fg="black",text="Nome:"+nomes[i]+"\nTelefone:"+telefones[i]+"\nEndereco:"+enderecos[i]+"\nEmail:"+emails[i])
-    #    lbl_dados.place(x=180,y=400+(150*j))
-    #    i+=1
+
+    
     
 btn_button = Button(tela,text="Cadastrar",command=Cadastrar,fg="white",bg="#4682B4",font=14,border="5",relief="ridge")
 btn_button.place(x=400,y=300)
